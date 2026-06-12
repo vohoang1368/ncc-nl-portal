@@ -1188,13 +1188,19 @@
       // supabaseClient.functions.invoke('notify-new-quote', { body: { submissionId: row.submission_id } });
 
       // Phản hồi cho NCC (Bước 5)
+      const ZALO_HOTLINE_URL = 'https://zalo.me/0822871368';
+
       if (isNewSupplier) {
-        setStatus('Đã nhận báo giá. Hồ sơ của Quý đơn vị đang chờ xác minh — Đại diện Hoàng Dung Biomass sẽ liên hệ qua Zalo/SĐT đã đăng ký.', false);
+        setStatus('Đã nhận báo giá. Hồ sơ của Quý đơn vị đang chờ xác minh. Đang chuyển sang Zalo Hoàng Dung Biomass để được hỗ trợ thêm...', false);
       } else {
-        setStatus('Đã nhận báo giá. Đại diện Hoàng Dung Biomass sẽ liên hệ lại với Quý đơn vị trong thời gian sớm nhất.', false);
+        setStatus('Đã nhận báo giá. Đang chuyển sang Zalo Hoàng Dung Biomass để được hỗ trợ thêm...', false);
       }
 
       submitBtn.textContent = 'Đã gửi';
+
+      setTimeout(() => {
+        window.location.href = ZALO_HOTLINE_URL;
+      }, 1500);
 
     } catch (err) {
       console.error(err);
