@@ -1168,114 +1168,26 @@
     setStatus('Đang gửi báo giá...', false);
 
     try {
-      // 1. Kiểm tra SĐT đã tồn tại chưa (RPC an toàn cho anon)
-      const { data: checkResult, error: checkError } = await supabaseClient
-        .rpc('check_supplier_phone', { p_phone: formData.phone });
+      const { data: result, error: rpcError } = await supabaseClient
+        .rpc('submit_supplier_quote', {
+          p_phone: formData.phone,
+          p_zalo: formData.zalo,
+          p_company_name: formData.supplierName,
+          p_email: formData.email,
+          p_fuels: formData.fuels,
+          p_packaging: formData.packaging,
+          p_warehouses: formData.warehouses,
+        });
 
-      if (checkError) throw checkError;
+      if (rpcError) throw rpcError;
 
-      const existing = checkResult && checkResult[0];
-      let supplierId;
-      let isNewSupplier = false;
+      const row = result && result[0];
+      const isNewSupplier = row ? row.is_new_supplier : true;
 
-      if (existing && existing.exists_flag) {
-        // 2a. NCC đã tồn tại
-        supplierId = existing.supplier_id;
+      // Thông báo nội bộ (Bước 4) — gọi Edge Function riêng (nếu có)
+      // supabaseClient.functions.invoke('notify-new-quote', { body: { submissionId: row.submission_id } });
 
-        // cập nhật thông tin liên hệ mới nhất (nếu có thay đổi)
-        const { error: updateError } = await supabaseClient
-          .from('ncc_suppliers')
-          .update({
-            company_name: formData.supplierName,
-            zalo_phone: formData.zalo,
-            email: formData.email,
-          })
-          .eq('id', supplierId);
-
-        if (updateError) throw updateError;
-
-      } else {
-        // 2b. NCC mới -> Bước 2.1: tạo hồ sơ + tài khoản
-        isNewSupplier = true;
-
-        const { data: newSupplier, error: insertError } = await supabaseClient
-          .from('ncc_suppliers')
-          .insert({
-            phone: formData.phone,
-            zalo_phone: formData.zalo,
-            company_name: formData.supplierName,
-            email: formData.email,
-            verification_status: 'pending',
-          })
-          .select('id')
-          .single();
-
-        if (insertError) throw insertError;
-        supplierId = newSupplier.id;
-
-        // Lưu ý: tạo auth.users (tài khoản đăng nhập SĐT) cần Supabase Admin API
-        // (service_role key) — KHÔNG thể thực hiện an toàn từ client/anon.
-        // Cần một Edge Function / server endpoint riêng để xử lý bước này.
-        // Tạm thời: supplier_id được tạo, auth_user_id để NULL,
-        // Admin sẽ tạo tài khoản đăng nhập khi xác minh thủ công.
-      }
-
-      // 3. Tạo submission header
-      const { data: submission, error: subError } = await supabaseClient
-        .from('ncc_quote_submissions')
-        .insert({
-          supplier_id: supplierId,
-          is_new_supplier: isNewSupplier,
-        })
-        .select('id')
-        .single();
-
-      if (subError) throw subError;
-      const submissionId = submission.id;
-
-      // 4. Insert nhật ký báo giá (append-only) — mỗi loại nhiên liệu 1 dòng
-      const priceLogRows = formData.fuels.map(f => ({
-        supplier_id: supplierId,
-        submission_id: submissionId,
-        ...f,
-      }));
-
-      const { error: priceLogError } = await supabaseClient
-        .from('ncc_nl_price_log')
-        .insert(priceLogRows);
-
-      if (priceLogError) throw priceLogError;
-
-      // 5. Insert bao bì (snapshot theo submission)
-      if (formData.packaging.length > 0) {
-        const packagingRows = formData.packaging.map(p => ({
-          submission_id: submissionId,
-          ...p,
-        }));
-
-        const { error: packagingError } = await supabaseClient
-          .from('ncc_packaging_options')
-          .insert(packagingRows);
-
-        if (packagingError) throw packagingError;
-      }
-
-      // 6. Insert / upsert kho giao hàng
-      const warehouseRows = formData.warehouses.map(w => ({
-        supplier_id: supplierId,
-        ...w,
-      }));
-
-      const { error: warehouseError } = await supabaseClient
-        .from('ncc_warehouses')
-        .insert(warehouseRows);
-
-      if (warehouseError) throw warehouseError;
-
-      // 7. Thông báo nội bộ (Bước 4) — gọi Edge Function riêng (nếu có)
-      // supabaseClient.functions.invoke('notify-new-quote', { body: { submissionId } });
-
-      // 8. Phản hồi cho NCC (Bước 5)
+      // Phản hồi cho NCC (Bước 5)
       if (isNewSupplier) {
         setStatus('Đã nhận báo giá. Hồ sơ của Quý đơn vị đang chờ xác minh — Đại diện Hoàng Dung Biomass sẽ liên hệ qua Zalo/SĐT đã đăng ký.', false);
       } else {
