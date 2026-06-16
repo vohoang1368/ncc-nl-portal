@@ -1412,11 +1412,11 @@
       if (isAdminLogin) {
         // Kiểm tra có phải Admin hợp lệ không
         const { data: adminRow, error: adminError } = await supabaseClient
-          .from('ncc_admins')
-          .select('id, full_name, email, role, is_active')
+          .from('app_users')
+          .select('id, full_name, email, role, is_active, app_access')
           .eq('auth_user_id', data.user.id)
           .single();
-        if (adminError || !adminRow || !adminRow.is_active) {
+        if (adminError || !adminRow || !adminRow.is_active || !adminRow.app_access?.includes('ncc_nl_portal')) {
           await supabaseClient.auth.signOut();
           throw new Error('Tài khoản này không có quyền Admin.');
         }
