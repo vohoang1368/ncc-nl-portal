@@ -187,6 +187,19 @@
   .quote-validity.active{background:#D6F5E3;color:#0B7A45;}
   .quote-validity.expired{background:#FFE4E0;color:#B23A2E;}
   .quote-validity.no-date{background:#F0F4F2;color:var(--muted);}
+  .quote-price-tag{
+    font-size:11px;font-weight:700;color:var(--muted);
+    background:#F0F4F2;border-radius:20px;padding:2px 8px;margin-left:8px;
+    vertical-align:middle;
+  }
+  .quote-packaging-block{
+    margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);
+  }
+  .quote-packaging-title{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.02em;}
+  .pack-quote-row{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;padding:4px 0;}
+  .pack-quote-name{color:var(--ink);}
+  .pack-quote-price{color:var(--moss);font-weight:700;}
+  .pack-quote-warn{color:#B23A2E;font-weight:500;font-size:11px;}
 
   .empty-state{text-align:center;padding:48px 20px;color:var(--muted);}
   .empty-state .emoji{font-size:40px;margin-bottom:12px;}
@@ -329,9 +342,16 @@
   }
   .pack-option.checked .pack-costs{display:grid;}
   @media (min-width:480px){ .pack-costs{grid-template-columns:1fr 1fr;} }
-  @media (min-width:600px){ .pack-costs{grid-template-columns:1fr 1fr 1fr;} }
+  @media (min-width:680px){ .pack-costs{grid-template-columns:1fr 1fr 1fr 1fr;} }
   .pack-costs .field{margin-bottom:0;}
   .pack-costs label{font-size:11px;line-height:1.4;}
+  .pack-price-row{
+    display:none;align-items:baseline;justify-content:space-between;
+    margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);
+    font-size:13px;color:var(--muted);
+  }
+  .pack-option.checked .pack-price-row{display:flex;}
+  .pack-final-price{font-size:17px;font-weight:700;color:var(--moss);}
 
   /* Weighbridge check */
   .weighbridge-check{
@@ -839,6 +859,10 @@
               <div class="unit-input"><input type="number" data-cost="loading" placeholder="0"><span class="unit">đ/kg</span></div>
             </div>
           </div>
+          <div class="pack-price-row">
+            <span>Giá bán áp dụng (EXW + phụ phí)</span>
+            <b class="pack-final-price" data-final-price="0">— đ/kg</b>
+          </div>
         </div>
 
         <div class="pack-option" data-pack-type="jumbo_90x90x120">
@@ -853,6 +877,10 @@
               <div class="unit-input"><input type="number" data-cost="deposit" placeholder="0"><span class="unit">đ/bao</span></div>
             </div>
             <div class="field">
+              <label>Trọng lượng quy đổi</label>
+              <div class="unit-input"><input type="number" data-cost="bag_weight" placeholder="500"><span class="unit">kg/bao</span></div>
+            </div>
+            <div class="field">
               <label>Công đóng bao</label>
               <div class="unit-input"><input type="number" data-cost="labor" placeholder="0"><span class="unit">đ/kg</span></div>
             </div>
@@ -860,6 +888,10 @@
               <label>Phí bốc xếp lên xe</label>
               <div class="unit-input"><input type="number" data-cost="loading" placeholder="0"><span class="unit">đ/kg</span></div>
             </div>
+          </div>
+          <div class="pack-price-row">
+            <span>Giá bán áp dụng (EXW + phụ phí)</span>
+            <b class="pack-final-price" data-final-price="0">— đ/kg</b>
           </div>
         </div>
 
@@ -875,6 +907,10 @@
               <div class="unit-input"><input type="number" data-cost="deposit" placeholder="0"><span class="unit">đ/bao</span></div>
             </div>
             <div class="field">
+              <label>Trọng lượng quy đổi</label>
+              <div class="unit-input"><input type="number" data-cost="bag_weight" placeholder="800"><span class="unit">kg/bao</span></div>
+            </div>
+            <div class="field">
               <label>Công đóng bao</label>
               <div class="unit-input"><input type="number" data-cost="labor" placeholder="0"><span class="unit">đ/kg</span></div>
             </div>
@@ -882,6 +918,10 @@
               <label>Phí bốc xếp lên xe</label>
               <div class="unit-input"><input type="number" data-cost="loading" placeholder="0"><span class="unit">đ/kg</span></div>
             </div>
+          </div>
+          <div class="pack-price-row">
+            <span>Giá bán áp dụng (EXW + phụ phí)</span>
+            <b class="pack-final-price" data-final-price="0">— đ/kg</b>
           </div>
         </div>
 
@@ -897,6 +937,10 @@
               <div class="unit-input"><input type="number" data-cost="deposit" placeholder="0"><span class="unit">đ/bao</span></div>
             </div>
             <div class="field">
+              <label>Trọng lượng quy đổi</label>
+              <div class="unit-input"><input type="number" data-cost="bag_weight" placeholder="40"><span class="unit">kg/bao</span></div>
+            </div>
+            <div class="field">
               <label>Công đóng bao</label>
               <div class="unit-input"><input type="number" data-cost="labor" placeholder="0"><span class="unit">đ/kg</span></div>
             </div>
@@ -904,6 +948,10 @@
               <label>Phí bốc xếp lên xe</label>
               <div class="unit-input"><input type="number" data-cost="loading" placeholder="0"><span class="unit">đ/kg</span></div>
             </div>
+          </div>
+          <div class="pack-price-row">
+            <span>Giá bán áp dụng (EXW + phụ phí)</span>
+            <b class="pack-final-price" data-final-price="0">— đ/kg</b>
           </div>
         </div>
 
@@ -919,6 +967,10 @@
               <div class="unit-input"><input type="number" data-cost="deposit" placeholder="0"><span class="unit">đ/pallet</span></div>
             </div>
             <div class="field">
+              <label>Trọng lượng quy đổi</label>
+              <div class="unit-input"><input type="number" data-cost="bag_weight" placeholder="600"><span class="unit">kg/pallet</span></div>
+            </div>
+            <div class="field">
               <label>Công đóng pallet</label>
               <div class="unit-input"><input type="number" data-cost="labor" placeholder="0"><span class="unit">đ/kg</span></div>
             </div>
@@ -926,6 +978,10 @@
               <label>Phí bốc xếp lên xe</label>
               <div class="unit-input"><input type="number" data-cost="loading" placeholder="0"><span class="unit">đ/kg</span></div>
             </div>
+          </div>
+          <div class="pack-price-row">
+            <span>Giá bán áp dụng (EXW + phụ phí)</span>
+            <b class="pack-final-price" data-final-price="0">— đ/kg</b>
           </div>
         </div>
 
@@ -1655,6 +1711,7 @@
   // ===================== CURRENT QUOTES =====================
   async function loadCurrentQuotes(){
     let quotes;
+    let packagingDefaults = [];
     if (supabaseClient) {
       const { data, error } = await supabaseClient
         .from('ncc_nl_current_quotes')
@@ -1663,13 +1720,47 @@
         .order('created_at', { ascending: false });
       quotes = error ? [] : data;
       if (error) console.error(error);
+
+      const { data: pkgData, error: pkgError } = await supabaseClient
+        .from('ncc_packaging_defaults')
+        .select('packaging_type, is_selected, bag_deposit_cost, bag_weight_kg, packing_labor_cost, loading_fee')
+        .eq('supplier_id', currentSupplier.id)
+        .eq('is_selected', true);
+      packagingDefaults = pkgError ? [] : (pkgData || []);
+      if (pkgError) console.error(pkgError);
     } else {
       quotes = MOCK_CURRENT_QUOTES;
+      packagingDefaults = Object.entries(MOCK_PACKAGING)
+        .filter(([, v]) => v.selected)
+        .map(([type, v]) => ({
+          packaging_type: type,
+          is_selected: true,
+          bag_deposit_cost: v.deposit,
+          bag_weight_kg: v.bag_weight,
+          packing_labor_cost: v.labor,
+          loading_fee: v.loading,
+        }));
     }
-    renderQuoteGrid(quotes);
+    renderQuoteGrid(quotes, packagingDefaults);
+    window.__lastLoadedQuotes = quotes;
   }
 
-  function renderQuoteGrid(quotes){
+  // Tính phụ phí quy đổi đ/kg cho 1 cấu hình đóng gói
+  function computePackagingSurchargePerKg(pkg){
+    let surcharge = 0;
+    if (pkg.bag_deposit_cost != null) {
+      if (pkg.bag_weight_kg && pkg.bag_weight_kg > 0) {
+        surcharge += pkg.bag_deposit_cost / pkg.bag_weight_kg;
+      }
+      // nếu không có bag_weight_kg, không cộng được deposit -> bỏ qua (NCC cần nhập trọng lượng quy đổi)
+    }
+    if (pkg.packing_labor_cost != null) surcharge += pkg.packing_labor_cost;
+    if (pkg.loading_fee != null) surcharge += pkg.loading_fee;
+    return surcharge;
+  }
+
+  function renderQuoteGrid(quotes, packagingDefaults){
+    packagingDefaults = packagingDefaults || [];
     const grid = document.getElementById('quoteGrid');
     const empty = document.getElementById('currentEmpty');
 
@@ -1701,12 +1792,34 @@
       if (q.ash_pct != null) specParts.push(`Tro <b>${q.ash_pct}%</b>`);
       const specText = specParts.length ? specParts.join(' · ') : 'Thông số kỹ thuật: chưa cập nhật';
 
+      let packagingHtml = '';
+      if (packagingDefaults.length > 0) {
+        const rows = packagingDefaults.map(pkg => {
+          const surcharge = computePackagingSurchargePerKg(pkg);
+          const finalPrice = q.price_exw_vnd_kg + surcharge;
+          const label = PACK_TYPE_LABELS[pkg.packaging_type] || pkg.packaging_type;
+          const missingWeight = (pkg.bag_deposit_cost != null && !(pkg.bag_weight_kg > 0));
+          return `
+            <div class="pack-quote-row">
+              <span class="pack-quote-name">${label}${missingWeight ? ' <span class="pack-quote-warn">(thiếu trọng lượng quy đổi)</span>' : ''}</span>
+              <b class="pack-quote-price">${fmtVnd(Math.round(finalPrice))} đ/kg</b>
+            </div>
+          `;
+        }).join('');
+        packagingHtml = `
+          <div class="quote-packaging-block">
+            <div class="quote-packaging-title">Giá bán theo hình thức đóng gói</div>
+            ${rows}
+          </div>
+        `;
+      }
+
       return `
         <div class="quote-card">
           <div class="quote-card-head">
             <span class="quote-fuel-name">${fuelName}</span>
           </div>
-          <div class="quote-price">${fmtVnd(q.price_exw_vnd_kg)} <span class="unit">đ/kg</span></div>
+          <div class="quote-price">${fmtVnd(q.price_exw_vnd_kg)} <span class="unit">đ/kg</span><span class="quote-price-tag">giao xá</span></div>
           <div class="quote-meta">
             Thành phần: ${compText}<br>
             ${specText}<br>
@@ -1714,6 +1827,7 @@
             Cập nhật: ${fmtDate(q.created_at)}
           </div>
           ${validityHtml}
+          ${packagingHtml}
         </div>
       `;
     }).join('');
@@ -2221,7 +2335,7 @@
       try {
         const { data, error } = await supabaseClient
           .from('ncc_packaging_defaults')
-          .select('packaging_type, is_selected, bag_deposit_cost, bag_deposit_unit, packing_labor_cost, loading_fee')
+          .select('packaging_type, is_selected, bag_deposit_cost, bag_deposit_unit, bag_weight_kg, packing_labor_cost, loading_fee')
           .eq('supplier_id', currentSupplier.id);
         if (error) throw error;
 
@@ -2230,6 +2344,7 @@
           configByType[row.packaging_type] = {
             selected: row.is_selected,
             deposit: row.bag_deposit_cost,
+            bag_weight: row.bag_weight_kg,
             labor: row.packing_labor_cost,
             loading: row.loading_fee,
           };
@@ -2252,8 +2367,72 @@
         const key = input.dataset.cost;
         if (cfg[key] != null) input.value = cfg[key];
       });
+
+      updatePackPriceRow(opt);
     });
   }
+
+  // Giá EXW tham chiếu để minh họa "giá bán áp dụng" ngay trong tab Cấu hình.
+  // Lấy giá giao xá cao nhất trong các báo giá hiện tại của NCC (chỉ mang tính minh họa —
+  // giá bán thật theo từng loại nhiên liệu hiển thị ở tab "Báo giá mới").
+  function getReferenceExwPrice(){
+    const quotes = (typeof window.__lastLoadedQuotes !== 'undefined') ? window.__lastLoadedQuotes : null;
+    if (quotes && quotes.length > 0) {
+      return Math.max(...quotes.map(q => q.price_exw_vnd_kg || 0));
+    }
+    return null;
+  }
+
+  function updatePackPriceRow(opt){
+    const priceEl = opt.querySelector('.pack-final-price');
+    if (!priceEl) return;
+
+    const refExw = getReferenceExwPrice();
+    const getVal = (key) => {
+      const input = opt.querySelector(`[data-cost="${key}"]`);
+      if (!input || input.value === '' || input.disabled) return null;
+      return parseFloat(input.value);
+    };
+
+    const deposit = getVal('deposit');
+    const bagWeight = getVal('bag_weight');
+    const labor = getVal('labor');
+    const loading = getVal('loading');
+
+    if (refExw == null) {
+      priceEl.textContent = '— đ/kg (chưa có báo giá EXW)';
+      return;
+    }
+
+    let surcharge = 0;
+    let missingWeight = false;
+    if (deposit != null) {
+      if (bagWeight && bagWeight > 0) {
+        surcharge += deposit / bagWeight;
+      } else {
+        missingWeight = true;
+      }
+    }
+    if (labor != null) surcharge += labor;
+    if (loading != null) surcharge += loading;
+
+    if (missingWeight) {
+      priceEl.textContent = 'Nhập trọng lượng quy đổi để tính giá';
+      return;
+    }
+
+    const finalPrice = refExw + surcharge;
+    priceEl.textContent = `${fmtVnd(Math.round(finalPrice))} đ/kg (minh họa trên giá EXW ${fmtVnd(refExw)})`;
+  }
+
+  // Cập nhật giá ngay khi NCC gõ số trong bất kỳ ô chi phí nào
+  document.querySelectorAll('#configTab .pack-option').forEach(opt => {
+    opt.querySelectorAll('[data-cost]').forEach(input => {
+      input.addEventListener('input', () => updatePackPriceRow(opt));
+    });
+    const checkbox = opt.querySelector('.pack-check-row input');
+    checkbox.addEventListener('change', () => updatePackPriceRow(opt));
+  });
 
   document.getElementById('savePackagingBtn').addEventListener('click', async () => {
     const statusEl = document.getElementById('packagingStatus');
@@ -2287,6 +2466,7 @@
       packaging_type: r.packaging_type,
       is_selected: r.selected,
       bag_deposit_cost: r.deposit != null ? r.deposit : null,
+      bag_weight_kg: r.bag_weight != null ? r.bag_weight : null,
       packing_labor_cost: r.labor != null ? r.labor : null,
       loading_fee: r.loading != null ? r.loading : null,
     }));
