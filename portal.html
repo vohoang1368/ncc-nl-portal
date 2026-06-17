@@ -766,9 +766,28 @@
             <label for="legalTaxCode">Mã số thuế</label>
             <input type="text" id="legalTaxCode" placeholder="VD: 0312345678">
           </div>
+        </div>
+
+        <div class="field">
+          <label for="legalAddress1">Địa chỉ 1 (số nhà, đường) — pháp lý / xuất hợp đồng</label>
+          <input type="text" id="legalAddress1" placeholder="VD: 123 Đường Lê Lợi">
+        </div>
+        <div class="field">
+          <label for="legalAddress2">Địa chỉ 2 (tòa nhà, ghi chú — không bắt buộc)</label>
+          <input type="text" id="legalAddress2" placeholder="VD: Tầng 3, Tòa nhà ABC">
+        </div>
+        <div class="row2">
           <div class="field">
-            <label for="legalAddress">Địa chỉ pháp lý / xuất hợp đồng</label>
-            <input type="text" id="legalAddress" placeholder="Số nhà, đường, xã/phường, huyện, tỉnh">
+            <label for="legalProvince">Tỉnh / Thành phố</label>
+            <select id="legalProvince">
+              <option value="">— Chọn Tỉnh/Thành —</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="legalWard">Xã / Phường</label>
+            <select id="legalWard" disabled>
+              <option value="">— Chọn Tỉnh/Thành trước —</option>
+            </select>
           </div>
         </div>
 
@@ -1002,8 +1021,24 @@
         <input type="text" id="whName" placeholder="VD: Kho 2 - Tân Phú">
       </div>
       <div class="field">
-        <label for="whAddress">Địa chỉ chi tiết <span class="required-mark">*</span></label>
-        <input type="text" id="whAddress" placeholder="Số nhà, đường, xã/phường, huyện, tỉnh">
+        <label for="whAddress1">Địa chỉ 1 (số nhà, đường) <span class="required-mark">*</span></label>
+        <input type="text" id="whAddress1" placeholder="VD: 123 Đường Lê Lợi">
+      </div>
+      <div class="field">
+        <label for="whAddress2">Địa chỉ 2 (tòa nhà, ghi chú — không bắt buộc)</label>
+        <input type="text" id="whAddress2" placeholder="VD: Kế bên trạm xăng">
+      </div>
+      <div class="field">
+        <label for="whProvince">Tỉnh / Thành phố <span class="required-mark">*</span></label>
+        <select id="whProvince">
+          <option value="">— Chọn Tỉnh/Thành —</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="whWard">Xã / Phường <span class="required-mark">*</span></label>
+        <select id="whWard" disabled>
+          <option value="">— Chọn Tỉnh/Thành trước —</option>
+        </select>
       </div>
 
       <label class="weighbridge-check">
@@ -1083,22 +1118,25 @@
             <select class="fuel-select">
               <option value="" selected>— Chọn loại nhiên liệu —</option>
               <optgroup label="Wood">
-                <option value="wood_pellet">Viên nén gỗ</option>
-                <option value="wood_chip_log">Củi/dăm băm</option>
-                <option value="log_wood">Củi cây nguyên khúc</option>
-                <option value="compressed_log_d90">Củi nén D90</option>
+                <option value="ca7ab594-88bf-4e7c-b326-379c197fe6b9">Viên nén gỗ</option>
+                <option value="e9981180-1d58-4ab3-97e2-50b889a19ed6">Dăm tạp băm</option>
+                <option value="53c62469-1086-405d-a957-dfb7864577f9">Củi tạp băm</option>
+                <option value="44f66ae2-9bab-4e1c-98a6-a89454d493cf">Củi cây cao su (băm/khúc)</option>
+                <option value="094eb210-98e4-41d0-a6ae-391a924c98e0">Củi nén D90</option>
               </optgroup>
               <optgroup label="Trấu">
-                <option value="rice_husk">Vỏ trấu (rời / nghiền)</option>
-                <option value="rice_husk_pellet">Viên nén trấu</option>
-                <option value="rice_husk_log_d90">Củi trấu D90</option>
+                <option value="a5b01513-3072-4551-a9fb-5bde24092139">Vỏ trấu rời</option>
+                <option value="927adde2-ffe3-467f-9d3d-99e69641d1e2">Vỏ trấu nghiền</option>
+                <option value="66e59c9d-ee1f-4811-b889-5c634bc6f7dc">Viên nén trấu</option>
+                <option value="c9352e30-d478-46cd-9662-81d255ae9ccc">Củi trấu D90</option>
               </optgroup>
               <optgroup label="Vỏ điều">
-                <option value="cashew_pellet">Viên nén bã vỏ điều</option>
-                <option value="cashew_loose">Bã vỏ điều (rời)</option>
+                <option value="2c06c71f-bba9-4709-bbe4-94776fb4505e">Viên nén bã vỏ điều</option>
+                <option value="c77ad78c-c3cb-4063-bab3-56000e09e1cc">Bã vỏ điều (rời)</option>
               </optgroup>
               <optgroup label="Than">
-                <option value="coal_indo">Than Indo (cám / cục)</option>
+                <option value="e6c5e06f-c8b1-4444-b84b-59e136208436">Than cám Indo</option>
+                <option value="2012c64a-f13a-457e-b81a-9333991755b0">Than cục Indo</option>
               </optgroup>
             </select>
             <button class="fuel-remove" title="Xóa loại này">✕</button>
@@ -1193,18 +1231,109 @@
     ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
 
-  const FUEL_LABELS = {
-    wood_pellet: 'Viên nén gỗ',
-    wood_chip_log: 'Củi/dăm băm',
-    log_wood: 'Củi cây nguyên khúc',
-    compressed_log_d90: 'Củi nén D90',
-    rice_husk: 'Vỏ trấu (rời / nghiền)',
-    rice_husk_pellet: 'Viên nén trấu',
-    rice_husk_log_d90: 'Củi trấu D90',
-    cashew_pellet: 'Viên nén bã vỏ điều',
-    cashew_loose: 'Bã vỏ điều (rời)',
-    coal_indo: 'Than Indo (cám / cục)',
-  };
+  // ===================== ĐỊA CHỈ CHUẨN HÓA (Tỉnh/Thành -> Xã/Phường) =====================
+  // Dùng chung cho mọi nơi nhập địa chỉ trong portal (kho hàng, địa chỉ pháp lý...).
+  let PROVINCES_CACHE = null;
+  const WARDS_CACHE_BY_PROVINCE = {};
+  let PROVINCE_LABELS = {};
+  let WARD_LABELS = {};
+
+  async function loadProvincesOnce(){
+    if (PROVINCES_CACHE) return PROVINCES_CACHE;
+    if (!supabaseClient) { PROVINCES_CACHE = []; return PROVINCES_CACHE; }
+    const { data, error } = await supabaseClient
+      .from('provinces')
+      .select('code, name')
+      .order('name', { ascending: true });
+    PROVINCES_CACHE = error ? [] : (data || []);
+    if (error) console.error('Không tải được danh sách tỉnh/thành:', error);
+    PROVINCE_LABELS = {};
+    PROVINCES_CACHE.forEach(p => { PROVINCE_LABELS[p.code] = p.name; });
+    return PROVINCES_CACHE;
+  }
+
+  async function loadWardsByProvince(provinceCode){
+    if (!provinceCode) return [];
+    if (WARDS_CACHE_BY_PROVINCE[provinceCode]) return WARDS_CACHE_BY_PROVINCE[provinceCode];
+    if (!supabaseClient) return [];
+    const { data, error } = await supabaseClient
+      .from('wards')
+      .select('code, name')
+      .eq('province_code', provinceCode)
+      .order('name', { ascending: true });
+    const wards = error ? [] : (data || []);
+    if (error) console.error('Không tải được danh sách xã/phường:', error);
+    WARDS_CACHE_BY_PROVINCE[provinceCode] = wards;
+    wards.forEach(w => { WARD_LABELS[w.code] = w.name; });
+    return wards;
+  }
+
+  async function populateProvinceSelect(selectEl, selectedCode){
+    const provinces = await loadProvincesOnce();
+    selectEl.innerHTML = '<option value="">— Chọn Tỉnh/Thành —</option>' +
+      provinces.map(p => `<option value="${p.code}"${p.code === selectedCode ? ' selected' : ''}>${p.name}</option>`).join('');
+  }
+
+  async function populateWardSelect(selectEl, provinceCode, selectedWardCode){
+    if (!provinceCode) {
+      selectEl.innerHTML = '<option value="">— Chọn Tỉnh/Thành trước —</option>';
+      selectEl.disabled = true;
+      return;
+    }
+    selectEl.disabled = true;
+    selectEl.innerHTML = '<option value="">Đang tải...</option>';
+    const wards = await loadWardsByProvince(provinceCode);
+    selectEl.innerHTML = '<option value="">— Chọn Xã/Phường —</option>' +
+      wards.map(w => `<option value="${w.code}"${w.code === selectedWardCode ? ' selected' : ''}>${w.name}</option>`).join('');
+    selectEl.disabled = false;
+  }
+
+  // Gắn cascade Tỉnh -> Xã cho 1 cặp <select>. Gọi 1 lần khi modal/form được mở.
+  // selectedProvince/selectedWard dùng để pre-select khi sửa dữ liệu có sẵn.
+  async function attachAddressCascadeById(provinceSelectId, wardSelectId, selectedProvince, selectedWard){
+    const provinceSelect = document.getElementById(provinceSelectId);
+    const wardSelect = document.getElementById(wardSelectId);
+    if (!provinceSelect || !wardSelect) return;
+
+    await populateProvinceSelect(provinceSelect, selectedProvince || '');
+    await populateWardSelect(wardSelect, selectedProvince || '', selectedWard || '');
+
+    // tránh gắn listener trùng lặp nếu hàm được gọi lại nhiều lần (mở modal nhiều lần)
+    provinceSelect.onchange = () => {
+      populateWardSelect(wardSelect, provinceSelect.value, null);
+    };
+  }
+
+  function formatStructuredAddress(line1, line2, wardCode, provinceCode){
+    const parts = [line1, line2, WARD_LABELS[wardCode], PROVINCE_LABELS[provinceCode]].filter(Boolean);
+    return parts.join(', ');
+  }
+
+  // FUEL_LABELS được nạp động từ bảng `products` (key = product_id UUID, value = tên hiển thị).
+  // Trước đây dùng key text cố định (wood_pellet, rice_husk...) nhưng đã đổi sang product_id
+  // để đồng bộ với schema chuẩn hóa dùng chung giữa NCC NL Portal và Biz Tracker.
+  let FUEL_LABELS = {};
+
+  async function loadFuelLabels(){
+    if (!supabaseClient) {
+      // Fallback mock (chỉ dùng khi chạy offline/demo không có Supabase)
+      FUEL_LABELS = {
+        'ca7ab594-88bf-4e7c-b326-379c197fe6b9': 'Viên nén gỗ',
+        '44f66ae2-9bab-4e1c-98a6-a89454d493cf': 'Củi cây cao su (băm/khúc)',
+        '66e59c9d-ee1f-4811-b889-5c634bc6f7dc': 'Viên nén trấu',
+      };
+      return;
+    }
+    const { data, error } = await supabaseClient
+      .from('products')
+      .select('id, name');
+    if (error) {
+      console.error('Không tải được danh sách sản phẩm (products):', error);
+      return;
+    }
+    FUEL_LABELS = {};
+    (data || []).forEach(p => { FUEL_LABELS[p.id] = p.name; });
+  }
 
   const COMP_LABELS = {
     tram: 'Tràm', keo: 'Keo', cao_su: 'Cao su',
@@ -1231,19 +1360,19 @@
 
   const MOCK_CURRENT_QUOTES = [
     {
-      fuel_type: 'wood_pellet', composition: ['tram','cao_su'], composition_other: null,
+      product_id: 'ca7ab594-88bf-4e7c-b326-379c197fe6b9', composition: ['tram','cao_su'], composition_other: null,
       price_exw_vnd_kg: 2350, production_capacity_ton_month: 120,
       valid_from: '2026-06-01', valid_until: '2026-06-30',
       gcv_kcal: 4200, moisture_pct: 9, ash_pct: 4, created_at: '2026-06-10T08:00:00Z',
     },
     {
-      fuel_type: 'rice_husk_pellet', composition: [], composition_other: null,
+      product_id: '66e59c9d-ee1f-4811-b889-5c634bc6f7dc', composition: [], composition_other: null,
       price_exw_vnd_kg: 1480, production_capacity_ton_month: 80,
       valid_from: '2026-06-05', valid_until: '2026-07-05',
       gcv_kcal: 3900, moisture_pct: 9, ash_pct: 18, created_at: '2026-06-10T08:00:00Z',
     },
     {
-      fuel_type: 'log_wood', composition: ['cao_su'], composition_other: null,
+      product_id: '44f66ae2-9bab-4e1c-98a6-a89454d493cf', composition: ['cao_su'], composition_other: null,
       price_exw_vnd_kg: 980, production_capacity_ton_month: null,
       valid_from: null, valid_until: null,
       gcv_kcal: null, moisture_pct: null, ash_pct: null, created_at: '2026-05-20T08:00:00Z',
@@ -1251,12 +1380,12 @@
   ];
 
   const MOCK_HISTORY = [
-    { created_at: '2026-06-10T08:00:00Z', fuel_type: 'wood_pellet', price_exw_vnd_kg: 2350, valid_from: '2026-06-01', valid_until: '2026-06-30', gcv_kcal: 4200, moisture_pct: 9, ash_pct: 4 },
-    { created_at: '2026-06-10T08:00:00Z', fuel_type: 'rice_husk_pellet', price_exw_vnd_kg: 1480, valid_from: '2026-06-05', valid_until: '2026-07-05', gcv_kcal: 3900, moisture_pct: 9, ash_pct: 18 },
-    { created_at: '2026-05-20T08:00:00Z', fuel_type: 'log_wood', price_exw_vnd_kg: 980, valid_from: null, valid_until: null, gcv_kcal: null, moisture_pct: null, ash_pct: null },
-    { created_at: '2026-05-12T08:00:00Z', fuel_type: 'wood_pellet', price_exw_vnd_kg: 2280, valid_from: '2026-05-01', valid_until: '2026-05-31', gcv_kcal: 4150, moisture_pct: 10, ash_pct: 4.5 },
-    { created_at: '2026-04-15T08:00:00Z', fuel_type: 'rice_husk_pellet', price_exw_vnd_kg: 1450, valid_from: '2026-04-15', valid_until: '2026-05-15', gcv_kcal: 3850, moisture_pct: 9.5, ash_pct: 18.5 },
-    { created_at: '2026-04-02T08:00:00Z', fuel_type: 'wood_pellet', price_exw_vnd_kg: 2300, valid_from: '2026-04-01', valid_until: '2026-04-30', gcv_kcal: 4100, moisture_pct: 10, ash_pct: 5 },
+    { created_at: '2026-06-10T08:00:00Z', product_id: 'ca7ab594-88bf-4e7c-b326-379c197fe6b9', price_exw_vnd_kg: 2350, valid_from: '2026-06-01', valid_until: '2026-06-30', gcv_kcal: 4200, moisture_pct: 9, ash_pct: 4 },
+    { created_at: '2026-06-10T08:00:00Z', product_id: '66e59c9d-ee1f-4811-b889-5c634bc6f7dc', price_exw_vnd_kg: 1480, valid_from: '2026-06-05', valid_until: '2026-07-05', gcv_kcal: 3900, moisture_pct: 9, ash_pct: 18 },
+    { created_at: '2026-05-20T08:00:00Z', product_id: '44f66ae2-9bab-4e1c-98a6-a89454d493cf', price_exw_vnd_kg: 980, valid_from: null, valid_until: null, gcv_kcal: null, moisture_pct: null, ash_pct: null },
+    { created_at: '2026-05-12T08:00:00Z', product_id: 'ca7ab594-88bf-4e7c-b326-379c197fe6b9', price_exw_vnd_kg: 2280, valid_from: '2026-05-01', valid_until: '2026-05-31', gcv_kcal: 4150, moisture_pct: 10, ash_pct: 4.5 },
+    { created_at: '2026-04-15T08:00:00Z', product_id: '66e59c9d-ee1f-4811-b889-5c634bc6f7dc', price_exw_vnd_kg: 1450, valid_from: '2026-04-15', valid_until: '2026-05-15', gcv_kcal: 3850, moisture_pct: 9.5, ash_pct: 18.5 },
+    { created_at: '2026-04-02T08:00:00Z', product_id: 'ca7ab594-88bf-4e7c-b326-379c197fe6b9', price_exw_vnd_kg: 2300, valid_from: '2026-04-01', valid_until: '2026-04-30', gcv_kcal: 4100, moisture_pct: 10, ash_pct: 5 },
   ];
 
   // MOCK thông tin pháp lý doanh nghiệp
@@ -1295,7 +1424,7 @@
       order_date: '2026-06-08',
       status: 'unpaid', // unpaid | partial | paid | disputed
       items: [
-        { vat_invoice_no: '0000482', fuel_type: 'wood_pellet', quantity_kg: 18000, unit_price: 2350, vat_rate: 8 },
+        { vat_invoice_no: '0000482', product_id: 'ca7ab594-88bf-4e7c-b326-379c197fe6b9', quantity_kg: 18000, unit_price: 2350, vat_rate: 8 },
       ],
       paid_amount: 0,
       dispute_note: null,
@@ -1305,8 +1434,8 @@
       order_date: '2026-05-22',
       status: 'partial',
       items: [
-        { vat_invoice_no: '0000461', fuel_type: 'rice_husk_pellet', quantity_kg: 22000, unit_price: 1450, vat_rate: 8 },
-        { vat_invoice_no: '0000462', fuel_type: 'wood_pellet', quantity_kg: 5000, unit_price: 2280, vat_rate: 8 },
+        { vat_invoice_no: '0000461', product_id: '66e59c9d-ee1f-4811-b889-5c634bc6f7dc', quantity_kg: 22000, unit_price: 1450, vat_rate: 8 },
+        { vat_invoice_no: '0000462', product_id: 'ca7ab594-88bf-4e7c-b326-379c197fe6b9', quantity_kg: 5000, unit_price: 2280, vat_rate: 8 },
       ],
       paid_amount: 20000000,
       dispute_note: null,
@@ -1316,7 +1445,7 @@
       order_date: '2026-05-02',
       status: 'paid',
       items: [
-        { vat_invoice_no: '0000430', fuel_type: 'log_wood', quantity_kg: 30000, unit_price: 980, vat_rate: 5 },
+        { vat_invoice_no: '0000430', product_id: '44f66ae2-9bab-4e1c-98a6-a89454d493cf', quantity_kg: 30000, unit_price: 980, vat_rate: 5 },
       ],
       paid_amount: null, // tính = total sau khi build
       dispute_note: null,
@@ -1326,7 +1455,7 @@
       order_date: '2026-04-10',
       status: 'disputed',
       items: [
-        { vat_invoice_no: '0000398', fuel_type: 'wood_pellet', quantity_kg: 15000, unit_price: 2300, vat_rate: 8 },
+        { vat_invoice_no: '0000398', product_id: 'ca7ab594-88bf-4e7c-b326-379c197fe6b9', quantity_kg: 15000, unit_price: 2300, vat_rate: 8 },
       ],
       paid_amount: null, // tính = total sau khi build
       dispute_note: 'NCC báo nhận thiếu 1.500.000đ so với số đã xác nhận.',
@@ -1660,8 +1789,10 @@
       pendingBanner.classList.remove('hidden');
     }
 
-    loadCurrentQuotes();
-    loadHistory();
+    loadFuelLabels().then(() => {
+      loadCurrentQuotes();
+      loadHistory();
+    });
 
     const adminBadge = document.getElementById('adminBadge');
     const switchLink = document.getElementById('switchSupplierLink');
@@ -1774,7 +1905,7 @@
     const today = new Date().toISOString().slice(0,10);
 
     grid.innerHTML = quotes.map(q => {
-      const fuelName = FUEL_LABELS[q.fuel_type] || q.fuel_type;
+      const fuelName = FUEL_LABELS[q.product_id] || q.product_id;
       const compTags = (q.composition || []).map(c => COMP_LABELS[c] || c);
       if (q.composition_other) compTags.push(q.composition_other);
       const compText = compTags.length ? compTags.join(', ') : '—';
@@ -1867,12 +1998,12 @@
     const sorted = [...logs].sort((a,b) => new Date(a.created_at) - new Date(b.created_at));
 
     const rows = logs.map(log => {
-      const fuelName = FUEL_LABELS[log.fuel_type] || log.fuel_type;
+      const fuelName = FUEL_LABELS[log.product_id] || log.product_id;
 
       let prevPrice = null;
       for (const s of sorted) {
-        if (s.created_at === log.created_at && s.fuel_type === log.fuel_type) break;
-        if (s.fuel_type === log.fuel_type) prevPrice = s.price_exw_vnd_kg;
+        if (s.created_at === log.created_at && s.product_id === log.product_id) break;
+        if (s.product_id === log.product_id) prevPrice = s.price_exw_vnd_kg;
       }
 
       let trendHtml = '<span class="trend-flat">—</span>';
@@ -2013,7 +2144,7 @@
       if (!priceExw) return;
 
       entries.push({
-        fuel_type: select.value,
+        product_id: select.value,
         composition,
         composition_other: get('composition_other'),
         price_exw_vnd_kg: parseFloat(priceExw),
@@ -2097,38 +2228,58 @@
   });
 
   // ===================== CONFIG: THÔNG TIN PHÁP LÝ =====================
-  function loadLegalInfo(){
+  async function loadLegalInfo(){
     let info;
 
     if (supabaseClient) {
-      // TODO: khi có schema thật — SELECT từ ncc_suppliers (các cột pháp lý
-      // cần bổ sung: company_legal_name, short_name, tax_code, legal_address,
-      // rep_name, rep_gender, rep_position, contact_phone, contact_zalo, contact_email)
-      info = MOCK_LEGAL_INFO;
+      const { data, error } = await supabaseClient
+        .from('ncc_suppliers')
+        .select('legal_company_name, short_name, tax_code, legal_address_line_1, legal_address_line_2, legal_ward_code, legal_province_code, rep_name, rep_gender, rep_position, contact_phone, contact_zalo, contact_email')
+        .eq('id', currentSupplier.id)
+        .single();
+      if (error) {
+        console.error(error);
+        info = {};
+      } else {
+        info = data || {};
+      }
     } else {
       info = MOCK_LEGAL_INFO;
     }
 
-    document.getElementById('legalCompanyName').value = info.company_name || '';
+    document.getElementById('legalCompanyName').value = info.legal_company_name || info.company_name || '';
     document.getElementById('legalShortName').value = info.short_name || '';
     document.getElementById('legalTaxCode').value = info.tax_code || '';
-    document.getElementById('legalAddress').value = info.legal_address || '';
+    document.getElementById('legalAddress1').value = info.legal_address_line_1 || '';
+    document.getElementById('legalAddress2').value = info.legal_address_line_2 || '';
     document.getElementById('legalRepName').value = info.rep_name || '';
     document.getElementById('legalRepGender').value = info.rep_gender || '';
     document.getElementById('legalRepPosition').value = info.rep_position || '';
     document.getElementById('legalPhone').value = info.contact_phone || '';
     document.getElementById('legalZalo').value = info.contact_zalo || '';
     document.getElementById('legalEmail').value = info.contact_email || '';
+
+    attachAddressCascadeById('legalProvince', 'legalWard', info.legal_province_code, info.legal_ward_code);
   }
 
   document.getElementById('saveLegalInfoBtn').addEventListener('click', async () => {
     const statusEl = document.getElementById('legalInfoStatus');
 
+    const legalAddress1 = document.getElementById('legalAddress1').value.trim();
+    const legalAddress2 = document.getElementById('legalAddress2').value.trim() || null;
+    const legalProvinceCode = document.getElementById('legalProvince').value || null;
+    const legalWardCode = document.getElementById('legalWard').value || null;
+
     const payload = {
-      company_name: document.getElementById('legalCompanyName').value.trim(),
+      legal_company_name: document.getElementById('legalCompanyName').value.trim(),
       short_name: document.getElementById('legalShortName').value.trim(),
       tax_code: document.getElementById('legalTaxCode').value.trim(),
-      legal_address: document.getElementById('legalAddress').value.trim(),
+      legal_address_line_1: legalAddress1,
+      legal_address_line_2: legalAddress2,
+      legal_province_code: legalProvinceCode,
+      legal_ward_code: legalWardCode,
+      // cột legal_address cũ (deprecated) — giữ ở dạng gộp để tương thích báo cáo/dữ liệu cũ
+      legal_address: formatStructuredAddress(legalAddress1, legalAddress2, legalWardCode, legalProvinceCode),
       rep_name: document.getElementById('legalRepName').value.trim(),
       rep_gender: document.getElementById('legalRepGender').value,
       rep_position: document.getElementById('legalRepPosition').value.trim(),
@@ -2137,7 +2288,7 @@
       contact_email: document.getElementById('legalEmail').value.trim(),
     };
 
-    if (!payload.company_name || !payload.tax_code) {
+    if (!payload.legal_company_name || !payload.tax_code) {
       statusEl.textContent = 'Vui lòng nhập tối thiểu Tên pháp lý công ty và Mã số thuế.';
       statusEl.className = 'form-status show error';
       return;
@@ -2153,8 +2304,6 @@
     }
 
     try {
-      // TODO: khi có schema thật — UPDATE ncc_suppliers SET ... WHERE id = currentSupplier.id
-      // (cần bổ sung các cột pháp lý vào bảng ncc_suppliers)
       const { error } = await supabaseClient
         .from('ncc_suppliers')
         .update(payload)
@@ -2189,6 +2338,12 @@
     } else {
       warehouses = MOCK_WAREHOUSES;
     }
+
+    // Nạp trước tên Tỉnh/Thành + Xã/Phường cần dùng để hiển thị địa chỉ đầy đủ
+    await loadProvincesOnce();
+    const provinceCodes = [...new Set((warehouses || []).map(w => w.province_code).filter(Boolean))];
+    await Promise.all(provinceCodes.map(code => loadWardsByProvince(code)));
+
     renderWarehouseList(warehouses);
   }
 
@@ -2207,7 +2362,7 @@
       <div class="wh-card" data-id="${w.id}">
         <div class="wh-card-info">
           <div class="wh-card-name">${w.name}</div>
-          <div class="wh-card-address">${w.address}</div>
+          <div class="wh-card-address">${formatStructuredAddress(w.address_line_1, w.address_line_2, w.ward_code, w.province_code) || w.address || ''}</div>
           <div class="wh-card-badges">
             ${w.is_default ? '<span class="wh-badge default">Kho mặc định</span>' : ''}
             ${w.has_weighbridge ? '<span class="wh-badge">Có trạm cân</span>' : ''}
@@ -2239,9 +2394,11 @@
     warehouseEditingId = wh ? wh.id : null;
     warehouseModalTitle.textContent = wh ? 'Sửa thông tin kho' : 'Thêm kho';
     document.getElementById('whName').value = wh ? wh.name : '';
-    document.getElementById('whAddress').value = wh ? wh.address : '';
+    document.getElementById('whAddress1').value = wh ? (wh.address_line_1 || '') : '';
+    document.getElementById('whAddress2').value = wh ? (wh.address_line_2 || '') : '';
     document.getElementById('whWeighbridge').checked = wh ? wh.has_weighbridge : false;
     document.getElementById('whMaps').value = wh ? (wh.google_maps_url || '') : '';
+    attachAddressCascadeById('whProvince', 'whWard', wh ? wh.province_code : '', wh ? wh.ward_code : '');
     warehouseModalStatus.classList.remove('show');
     warehouseModal.classList.remove('hidden');
   }
@@ -2251,18 +2408,27 @@
 
   document.getElementById('warehouseModalSave').addEventListener('click', async () => {
     const name = document.getElementById('whName').value.trim();
-    const address = document.getElementById('whAddress').value.trim();
+    const address1 = document.getElementById('whAddress1').value.trim();
+    const address2 = document.getElementById('whAddress2').value.trim() || null;
+    const provinceCode = document.getElementById('whProvince').value;
+    const wardCode = document.getElementById('whWard').value;
     const hasWeighbridge = document.getElementById('whWeighbridge').checked;
     const mapsUrl = document.getElementById('whMaps').value.trim() || null;
 
-    if (!name || !address) {
-      warehouseModalStatus.textContent = 'Vui lòng nhập tên kho và địa chỉ.';
+    if (!name || !address1 || !provinceCode || !wardCode) {
+      warehouseModalStatus.textContent = 'Vui lòng nhập tên kho, địa chỉ 1, Tỉnh/Thành và Xã/Phường.';
       warehouseModalStatus.className = 'form-status show error';
       return;
     }
 
     const payload = {
-      name, address,
+      name,
+      address_line_1: address1,
+      address_line_2: address2,
+      province_code: provinceCode,
+      ward_code: wardCode,
+      // cột address cũ (deprecated) — giữ ở dạng gộp để tương thích báo cáo/dữ liệu cũ
+      address: formatStructuredAddress(address1, address2, wardCode, provinceCode),
       has_weighbridge: hasWeighbridge,
       google_maps_url: mapsUrl,
     };
@@ -2516,7 +2682,7 @@
 
           const { data: itemRows, error: itemError } = await supabaseClient
             .from('purchase_order_items')
-            .select('order_id, vat_invoice_no, fuel_type, quantity_kg, unit_price, vat_rate, line_subtotal, line_vat, line_total')
+            .select('order_id, vat_invoice_no, product_id, quantity_kg, unit_price, vat_rate, line_subtotal, line_vat, line_total')
             .in('order_id', orderIds);
           if (itemError) throw itemError;
 
@@ -2576,7 +2742,7 @@
     list.innerHTML = orders.map(o => {
       const outstanding = o.total_amount - o.paid_amount;
       const itemsSummary = o.items.map(it =>
-        `${FUEL_LABELS[it.fuel_type] || it.fuel_type} (${fmtVnd(it.quantity_kg)} kg)`
+        `${FUEL_LABELS[it.product_id] || it.product_id} (${fmtVnd(it.quantity_kg)} kg)`
       ).join(', ');
 
       return `
@@ -2632,7 +2798,7 @@
       return `
         <tr>
           <td class="vat-no">${it.vat_invoice_no}</td>
-          <td class="fuel-cell">${FUEL_LABELS[it.fuel_type] || it.fuel_type}</td>
+          <td class="fuel-cell">${FUEL_LABELS[it.product_id] || it.product_id}</td>
           <td>${fmtVnd(it.unit_price)} đ/kg</td>
           <td>${fmtVnd(it.quantity_kg)} kg</td>
           <td class="amount-cell">${fmtVnd(it.line_subtotal)} đ</td>
