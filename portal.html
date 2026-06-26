@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
@@ -1169,7 +1169,7 @@
                 <label>Năng lực sản xuất</label>
                 <div class="unit-input">
                   <input type="number" data-field="production_capacity" placeholder="0">
-                  <span class="unit">tấn/tháng</span>
+                  <span class="unit">kg/tháng</span>
                 </div>
               </div>
             </div>
@@ -1955,7 +1955,7 @@
           <div class="quote-meta">
             Thành phần: ${compText}<br>
             ${specText}<br>
-            ${q.production_capacity_ton_month ? `Năng lực: <b>${fmtVnd(q.production_capacity_ton_month)}</b> tấn/tháng<br>` : ''}
+            ${q.production_capacity_ton_month ? `Năng lực: <b>${fmtVnd(q.production_capacity_ton_month)}</b> kg/tháng<br>` : ''}
             Cập nhật: ${fmtDate(q.created_at)}
           </div>
           ${validityHtml}
