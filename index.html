@@ -565,26 +565,45 @@
         <div class="row3">
           <div class="field">
             <label>Nhiệt trị (GCV)</label>
-            <div class="unit-input">
-              <input type="number" data-field="gcv" placeholder="Để trống nếu chưa rõ">
-              <span class="unit">kcal</span>
+            <div class="row2">
+              <div class="unit-input">
+                <input type="number" data-field="gcv_min" placeholder="Từ">
+                <span class="unit">kcal</span>
+              </div>
+              <div class="unit-input">
+                <input type="number" data-field="gcv_max" placeholder="Đến">
+                <span class="unit">kcal</span>
+              </div>
             </div>
           </div>
           <div class="field">
             <label>Độ ẩm</label>
-            <div class="unit-input">
-              <input type="number" data-field="moisture" placeholder="Để trống nếu chưa rõ">
-              <span class="unit">%</span>
+            <div class="row2">
+              <div class="unit-input">
+                <input type="number" data-field="moisture_min" placeholder="Từ">
+                <span class="unit">%</span>
+              </div>
+              <div class="unit-input">
+                <input type="number" data-field="moisture_max" placeholder="Đến">
+                <span class="unit">%</span>
+              </div>
             </div>
           </div>
           <div class="field" style="margin-bottom:0">
             <label>Độ tro</label>
-            <div class="unit-input">
-              <input type="number" data-field="ash" placeholder="Để trống nếu chưa rõ">
-              <span class="unit">%</span>
+            <div class="row2">
+              <div class="unit-input">
+                <input type="number" data-field="ash_min" placeholder="Từ">
+                <span class="unit">%</span>
+              </div>
+              <div class="unit-input">
+                <input type="number" data-field="ash_max" placeholder="Đến">
+                <span class="unit">%</span>
+              </div>
             </div>
           </div>
         </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:-8px;margin-bottom:16px;">Để trống nếu chưa rõ thông số kỹ thuật</div>
 
         <div class="row2">
           <div class="field">
@@ -664,26 +683,45 @@
         <div class="row3">
           <div class="field">
             <label>Nhiệt trị (GCV)</label>
-            <div class="unit-input">
-              <input type="number" data-field="gcv" placeholder="Để trống nếu chưa rõ">
-              <span class="unit">kcal</span>
+            <div class="row2">
+              <div class="unit-input">
+                <input type="number" data-field="gcv_min" placeholder="Từ">
+                <span class="unit">kcal</span>
+              </div>
+              <div class="unit-input">
+                <input type="number" data-field="gcv_max" placeholder="Đến">
+                <span class="unit">kcal</span>
+              </div>
             </div>
           </div>
           <div class="field">
             <label>Độ ẩm</label>
-            <div class="unit-input">
-              <input type="number" data-field="moisture" placeholder="Để trống nếu chưa rõ">
-              <span class="unit">%</span>
+            <div class="row2">
+              <div class="unit-input">
+                <input type="number" data-field="moisture_min" placeholder="Từ">
+                <span class="unit">%</span>
+              </div>
+              <div class="unit-input">
+                <input type="number" data-field="moisture_max" placeholder="Đến">
+                <span class="unit">%</span>
+              </div>
             </div>
           </div>
           <div class="field" style="margin-bottom:0">
             <label>Độ tro</label>
-            <div class="unit-input">
-              <input type="number" data-field="ash" placeholder="Để trống nếu chưa rõ">
-              <span class="unit">%</span>
+            <div class="row2">
+              <div class="unit-input">
+                <input type="number" data-field="ash_min" placeholder="Từ">
+                <span class="unit">%</span>
+              </div>
+              <div class="unit-input">
+                <input type="number" data-field="ash_max" placeholder="Đến">
+                <span class="unit">%</span>
+              </div>
             </div>
           </div>
         </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:-8px;margin-bottom:16px;">Để trống nếu chưa rõ thông số kỹ thuật</div>
 
         <div class="row2">
           <div class="field">
@@ -1178,9 +1216,12 @@
         production_capacity_ton_month: get('production_capacity') ? parseFloat(get('production_capacity')) : null,
         valid_from: get('valid_from'),
         valid_until: get('valid_until'),
-        gcv_kcal: get('gcv') ? parseFloat(get('gcv')) : null,
-        moisture_pct: get('moisture') ? parseFloat(get('moisture')) : null,
-        ash_pct: get('ash') ? parseFloat(get('ash')) : null,
+        gcv_kcal_min: get('gcv_min') ? parseFloat(get('gcv_min')) : null,
+        gcv_kcal_max: get('gcv_max') ? parseFloat(get('gcv_max')) : null,
+        moisture_pct_min: get('moisture_min') ? parseFloat(get('moisture_min')) : null,
+        moisture_pct_max: get('moisture_max') ? parseFloat(get('moisture_max')) : null,
+        ash_pct_min: get('ash_min') ? parseFloat(get('ash_min')) : null,
+        ash_pct_max: get('ash_max') ? parseFloat(get('ash_max')) : null,
       });
     });
     return entries;
